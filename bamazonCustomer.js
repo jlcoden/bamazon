@@ -26,7 +26,7 @@ function start() {
     inquirer
       .prompt([
         {
-          name: "provideProductID",
+          name: "productID",
           type: "input",
           message:
             "Please provide the Product ID of the product you'd like to buy"
@@ -46,8 +46,31 @@ function start() {
       .then(function(answer) {
         // get the information of the chosen item
         var quantityRequested = answer.confirmUnits;
-        var itemID = answer.provideProductID;
+        var itemID = answer.productID;
         doTransaction(itemID, quantityRequested);
       });
   });
+}
+
+function doTransaction(productID, quantityRequested) {
+  connection.query(
+    "Select * FROM products WHERE item_id =" + productID,
+    function(err, results) {
+      if (err) throw err;
+      if (quantityRequested <= results[0].stock_quantity) {
+        var totalCost = results[0].price * quantityRequested;
+        console.log("Your order is in stock!");
+        console.log(
+          "Your total cost for " +
+            quantityRequested +
+            " " +
+            results[0].product_name +
+            " is " +
+            totalCost +
+            " Thank you!"
+        );
+        connection.end();
+      }
+    }
+  );
 }
