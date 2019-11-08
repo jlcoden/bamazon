@@ -69,7 +69,17 @@ function doTransaction(productID, quantityRequested) {
             totalCost +
             " Thank you!"
         );
-        connection.end();
+
+        connection.query(
+          "UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?",
+          [quantityRequested, productID]
+        );
+      } else {
+        console.log(
+          "Insufficient quantity! Sorry there is not enough " +
+            results[0].product_name +
+            "in stock to complete your order"
+        );
       }
     }
   );
