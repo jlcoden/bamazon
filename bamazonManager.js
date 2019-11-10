@@ -41,9 +41,9 @@ function runMenu() {
           viewLowInventory();
           break;
 
-        //    case "Add to inventory":
-        //        addToInventory();
-        //       break;
+        case "Add to Inventory":
+          addToInventory();
+          break;
 
         // case "Add new product":
         //   addToProduct();
@@ -98,3 +98,62 @@ function viewLowInventory() {
     runMenu();
   });
 }
+
+//If a manager selects Add to Inventory, your app should display a prompt that will let the manager "add more" of any item currently in the store.
+function addToInventory() {
+  // query the database for all items being auctioned
+  connection.query("SELECT * FROM products", function(err, results) {
+    if (err) throw err;
+    // once you have the items, prompt the user for which item they'd like to add more to
+    inquirer
+      .prompt([
+        {
+          name: "choice",
+          type: "rawlist",
+          choices: function() {
+            var choiceArray = [];
+            for (var i = 0; i < results.length; i++) {
+              choiceArray.push(results[i].product_name);
+            }
+            return choiceArray;
+          },
+          message: "For which item would you like to add more inventory?"
+        },
+        {
+          name: "addInventory",
+          type: "input",
+          message: "How much inventory would you like to add?"
+        }
+      ])
+
+      .then(function(answer) {
+        // get the information of the chosen item
+        var chosenItem;
+        for (var i = 0; i < results.length; i++) {
+          if (results[i].product_name === answer.choice) {
+            chosenItem = results[i];
+          } //end of if
+        } //end of for
+      }); //end of .then
+  });
+}
+
+//   connection.query(
+//     "UPDATE products SET ? WHERE ?",
+//     [
+//       {
+//         stock_quantity: answer.addInventory
+//       },
+//       {
+//         id: chosenItem.id
+//       }
+//     ],
+//     function(error) {
+//       if (error) throw err;
+//       console.log("Inventory Updated Successfully!");
+//       start();
+//     }
+//   );
+// }
+
+//If a manager selects Add New Product, it should allow the manager to add a completely new product to the store.
