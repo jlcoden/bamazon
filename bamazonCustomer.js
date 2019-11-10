@@ -22,6 +22,7 @@ function start() {
   // query the database for all products available for purchase
   connection.query("SELECT * FROM products", function(err, results) {
     if (err) throw err;
+    console.log(results);
     // once you have the products, prompt the user for which they'd like to buy
     inquirer
       .prompt([
