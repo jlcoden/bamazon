@@ -127,33 +127,34 @@ function addToInventory() {
       ])
 
       .then(function(answer) {
+        var quantityIncrease = answer.addInventory;
         // get the information of the chosen item
-        var chosenItem;
-        for (var i = 0; i < results.length; i++) {
-          if (results[i].product_name === answer.choice) {
-            chosenItem = results[i];
-          } //end of if
-        } //end of for
+        var chosenItem = answer.choice;
+        connection.query(
+          "UPDATE products SET stock_quantity = stock_quantity + ? WHERE product_name = ?",
+          [quantityIncrease, chosenItem]
+        );
+        console.log("Inventory Updated Successfully!");
+
+        connection.query(
+          "SELECT * FROM products WHERE product_name = ?",
+          [chosenItem],
+          function(err, results) {
+            if (err) throw err;
+
+            for (var i = 0; i < results.length; i++) {
+              console.log(
+                "Total Inventory for " +
+                  chosenItem +
+                  " is now " +
+                  results[i].stock_quantity
+              );
+            }
+            runMenu();
+          }
+        );
       }); //end of .then
   });
 }
-
-//   connection.query(
-//     "UPDATE products SET ? WHERE ?",
-//     [
-//       {
-//         stock_quantity: answer.addInventory
-//       },
-//       {
-//         id: chosenItem.id
-//       }
-//     ],
-//     function(error) {
-//       if (error) throw err;
-//       console.log("Inventory Updated Successfully!");
-//       start();
-//     }
-//   );
-// }
 
 //If a manager selects Add New Product, it should allow the manager to add a completely new product to the store.
