@@ -31,8 +31,6 @@ The application consists of the following code:
 
 ![](bamazonCustomer_queryDatabase.PNG)
 
-![](bamazonCustomer.gif)
-
 **Running the application and making a purchase**
 Enter in: node bamazonCustomer.js, enter item ID of product for purchase, and then enter quantity amount.
 ![](bamazonCustomer.gif)
