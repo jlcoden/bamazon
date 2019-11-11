@@ -23,10 +23,10 @@ Once the order is placed, the application then checks to see if there is enough 
 
 The application consists of the following code:
 
-- A start function that displayas a list of the products and runs the application
+- A start function that displays a list of the products and runs the application
   ![](bamazonCustomer_start.PNG)
 
-- Two prompts asking customer to enter the rpoduct id and quanity of units they would like to buy
+- Prompts asking customer to enter the product id and quanity of units they would like to buy
   ![](bamazonCustomer_prompt.PNG)
 
 - A doTransaction function that queries the database and verifies that there's enough in stock to make the purchase. If enough the total cost is shown.
@@ -46,13 +46,35 @@ If not enough in stock, show 'Insufficient quantity' will be shown:
 Running this application does the following actions:
 
 - Lists the following Menu Options:
-
   - View Products for Sale
   - View Low Inventory
   - Add to Inventory
   - Add New Product
 
+**Screenshots of the code:**
+
+**GIFs of the applicaiton in action:**
+
 - If a manager selects 'View Products for Sale', the application lists every item and their information.
+  ![](viewProductsForSale.gif)
+
 - If a manager selects 'View Low Inventory, then it displays all items with an inventory count lower than five.
+  ![](viewLowInventory.gif)
+
 - If a manager selects 'Add to Inventory' the app displays a prompt that will allow the manager to add more of any item currently in the store.
+  ![](addToInventory.gif)
+
 - If a manager selects 'Add New Product', the application allows the manager to add a completely new product to the store.
+  ![](addNewProduct.gif)
+
+**Technologies Used**
+
+- mySql
+- Inquirer
+- node.js
+
+**Link to the Application**
+https://jlcoden.github.io/bamazon/
+
+**Credits**
+Developer and app creator: Josh Cosson
