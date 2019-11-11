@@ -1,22 +1,25 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
+// create the connection for the sql database
 var connection = mysql.createConnection({
   host: "localhost",
 
-  // Your port; if not 3306
+  //my port nymber
   port: 3307,
 
-  // Your username
+  // username
   user: "root",
 
-  // Your password
+  // password
   password: "IcedMocha4",
   database: "bamazon"
 });
 
+//initiate runMenu
 runMenu();
 
+//runMenu function
 function runMenu() {
   inquirer
     .prompt({
@@ -31,6 +34,7 @@ function runMenu() {
         "exit"
       ]
     })
+    //based on answer, the following functions will be called
     .then(function(answer) {
       switch (answer.action) {
         case "View Products for Sale":
@@ -54,7 +58,7 @@ function runMenu() {
       }
     });
 }
-
+//viewProduct function, function to display products for sale
 function viewProducts() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
@@ -77,6 +81,7 @@ function viewProducts() {
   runMenu();
 }
 
+//function to view Low Inventory
 function viewLowInventory() {
   var query =
     "SELECT * FROM products Group By item_id HAVING stock_quantity < 5";
@@ -101,12 +106,12 @@ function viewLowInventory() {
   });
 }
 
-//If a manager selects Add to Inventory, your app should display a prompt that will let the manager "add more" of any item currently in the store.
+//function to allow user to add to the inventory of the different products
 function addToInventory() {
-  // query the database for all items being auctioned
+  // query the database for all products
   connection.query("SELECT * FROM products", function(err, results) {
     if (err) throw err;
-    // once you have the items, prompt the user for which item they'd like to add more to
+    //ask user which item they'd like to add more quantity to
     inquirer
       .prompt([
         {
@@ -160,6 +165,7 @@ function addToInventory() {
   });
 }
 
+//function to add a new product
 function addToProduct() {
   inquirer
     .prompt([
@@ -198,7 +204,7 @@ function addToProduct() {
     ])
 
     .then(function(answer) {
-      // when finished prompting, insert a new item into the db with that info
+      // insert a new product into the db
       connection.query(
         "INSERT INTO products SET ?",
         {

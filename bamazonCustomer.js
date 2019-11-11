@@ -1,41 +1,58 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
-// create the connection information for the sql database
+// connection information for the sql database
 var connection = mysql.createConnection({
   host: "localhost",
 
-  // Your port; if not 3306
+  //port
   port: 3307,
 
-  // Your username
+  //username
   user: "root",
 
-  // Your password
+  //password
   password: "IcedMocha4",
   database: "bamazon"
 });
 
 start();
 
+//function to start
 function start() {
-  // query the database for all products available for purchase
+  // query the database for all products available for purchase and display those products
   connection.query("SELECT * FROM products", function(err, results) {
     if (err) throw err;
-    console.log(results);
-    // once you have the products, prompt the user for which they'd like to buy
+    for (var i = 0; i < results.length; i++) {
+      console.log(
+        "Item ID: " +
+          results[i].item_id +
+          " || Product Name: " +
+          results[i].product_name +
+          " || Department Name: " +
+          results[i].department_name +
+          " || Price: " +
+          results[i].price +
+          " || Stock Quantity: " +
+          results[i].stock_quantity
+      );
+    }
+    // prompt the user for which product they'd like to buy
     inquirer
       .prompt([
         {
           name: "productID",
           type: "input",
           message:
+            //prompt to provide product id
             "Please provide the Product ID of the product you'd like to buy"
         },
         {
           name: "confirmUnits",
           type: "input",
+          //prompt to confirm how many units
           message: "Please confirm how may units you would like to buy",
+          //validate it's a number
           validate: function(value) {
             if (isNaN(value) === false) {
               return true;
@@ -44,6 +61,7 @@ function start() {
           }
         }
       ])
+      //take provided information from answer and do transaction
       .then(function(answer) {
         // get the information of the chosen item
         var quantityRequested = answer.confirmUnits;
@@ -53,6 +71,7 @@ function start() {
   });
 }
 
+//function that does the purchase transaction.
 function doTransaction(productID, quantityRequested) {
   connection.query(
     "Select * FROM products WHERE item_id =" + productID,
@@ -70,16 +89,18 @@ function doTransaction(productID, quantityRequested) {
             totalCost +
             " Thank you!"
         );
-
+        //query database to subtract stock quantity from product and units purchased
         connection.query(
           "UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?",
           [quantityRequested, productID]
         );
+        connection.end();
+        //if not enough product in stock throw error
       } else {
         console.log(
           "Insufficient quantity! Sorry there is not enough " +
             results[0].product_name +
-            "in stock to complete your order"
+            " in stock to complete your order"
         );
       }
     }
