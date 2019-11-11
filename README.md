@@ -23,20 +23,24 @@ Once the order is placed, the application then checks to see if there is enough 
 
 The application consists of the following code:
 
-![](bamazonCustomer_start.PNG)
+- A start function that displayas a list of the products and runs the application
+  ![](bamazonCustomer_start.PNG)
 
-![](bamazonCustomer_prompt.PNG)
+- Two prompts asking customer to enter the rpoduct id and quanity of units they would like to buy
+  ![](bamazonCustomer_prompt.PNG)
 
-![](bamazonCustomer_showTotalCost.PNG)
+- A doTransaction function that queries the database and verifies that there's enough in stock to make the purchase. If enough the total cost is shown.
+  ![](bamazonCustomer_showTotalCost.PNG)
 
-![](bamazonCustomer_queryDatabase.PNG)
+- Within the doTransaction function, the database is also updated with the deducted quantity after the purcahse.
+  ![](bamazonCustomer_queryDatabase.PNG)
 
 **Running the application and making a purchase**
 Enter in: node bamazonCustomer.js, enter item ID of product for purchase, and then enter quantity amount.
 ![](bamazonCustomer.gif)
 
 If not enough in stock, show 'Insufficient quantity' will be shown:
-![](notEnoughInStock.gif)
+![](notEnoughinStock.gif)
 
 **bamazonManager.js**
 Running this application does the following actions:
