@@ -33,10 +33,10 @@ The application consists of the following code:
 
 **Running the application and making a purchase**
 Enter in: node bamazonCustomer.js, enter item ID of product for purchase, and then enter quantity amount.
-![](bamazonCustomer.GIF)
+![](/bamazon/bamazonCustomer.gif)
 
 If not enough in stock, show 'Insufficient quantity' will be shown:
-![(notEnoughInStock.GIF)
+![](/bamazon/notEnoughInStock.gif)
 
 **bamazonManager.js**
 Running this application does the following actions:
