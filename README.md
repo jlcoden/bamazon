@@ -32,6 +32,7 @@ The application consists of the following code:
 ![](bamazonCustomer_queryDatabase.PNG)
 
 ![](bamazonCustomer.gif)
+
 ![](/bamazon/bamazonCustomer.gif)
 
 **Running the application and making a purchase**
