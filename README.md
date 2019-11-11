@@ -16,10 +16,27 @@ Bamazon is an application that will take in orders from customers and depletes t
 Running this application does the following actions:
 
     - Displays a list of all the items available for sell
-    - Prompts user to enter a product id of a product they would like to buy
-    - Then prompts the user to enter how many units of the product they would like to buy
+    - Prompts customer to enter a product id of a product they would like to buy
+    - Then prompts customer to enter how many units of the product they would like to buy
 
 Once the order is placed, the application then checks to see if there is enough of the product in stock for the purchase. If there's enough in stock, the customer is prompted so, and then they are given the total cost for their requested item and quanity. If there's not enough in stock, they are told that there is an Insufficient quantity.
+
+The application consists of the following code:
+
+![](bamazonCustomer_start.PNG)
+
+![](bamazonCustomer_prompt.PNG)
+
+![](bamazonCustomer_showTotalCost.PNG)
+
+![](bamazonCustomer_queryDatabase.PNG)
+
+**Running the application and making a purchase**
+Enter in: node bamazonCustomer.js, enter item ID of product for purchase, and then enter quantity amount.
+![](bamazonCustomer.GIF)
+
+If not enough in stock, show 'Insufficient quantity' will be shown:
+![(notEnoughInStock.GIF)
 
 **bamazonManager.js**
 Running this application does the following actions:
