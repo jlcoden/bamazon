@@ -53,6 +53,21 @@ Running this application does the following actions:
 
 **Screenshots of the code:**
 
+- runMEnu: Function which displays a menu and uses inquirer to allow the user to pick which action they'd like to take
+  ![](01_runMenu.PNG)
+
+- viewProducts: Function which allows the user to view all products in the database
+  ![](02_viewProducts.PNG)
+
+- viewLowIventory: Function which allows the user to view inventory that has less than 5 items in stock
+  ![](03_viewProducts.PNG)
+
+- addToInventory: Function which allows the user to add to inventory
+  ![](04_addToInventory.PNG)
+
+- addToProduct: Function which allows the user to add a product to the database
+  ![](05_addToProduct.PNG)
+
 **GIFs of the applicaiton in action:**
 
 - If a manager selects 'View Products for Sale', the application lists every item and their information.

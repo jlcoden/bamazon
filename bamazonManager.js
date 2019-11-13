@@ -83,6 +83,7 @@ function viewProducts() {
 
 //function to view Low Inventory
 function viewLowInventory() {
+  //query database to show all products with stock_quantity less than 5
   var query =
     "SELECT * FROM products Group By item_id HAVING stock_quantity < 5";
   connection.query(query, function(err, res) {
@@ -137,12 +138,13 @@ function addToInventory() {
         var quantityIncrease = answer.addInventory;
         // get the information of the chosen item
         var chosenItem = answer.choice;
+        //query database to select chosen item and then add the additional stock_quanity.
         connection.query(
           "UPDATE products SET stock_quantity = stock_quantity + ? WHERE product_name = ?",
           [quantityIncrease, chosenItem]
         );
         console.log("Inventory Updated Successfully!");
-
+        //query database to show the updated stock_quantity since addtional stock was added
         connection.query(
           "SELECT * FROM products WHERE product_name = ?",
           [chosenItem],
@@ -216,7 +218,7 @@ function addToProduct() {
         function(err) {
           if (err) throw err;
           console.log("Your product was successfully added!");
-          // re-prompt the user for if they want to bid or post
+          // re-prompt menu options
           runMenu();
         }
       );
