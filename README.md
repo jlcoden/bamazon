@@ -53,7 +53,7 @@ Running this application does the following actions:
 
 **Screenshots of the code:**
 
-- runMEnu: Function which displays a menu and uses inquirer to allow the user to pick which action they'd like to take
+- runMenu: Function which displays a menu and uses inquirer to allow the user to pick which action they'd like to take
   ![](01_runMenu.PNG)
 
 - viewProducts: Function which allows the user to view all products in the database
